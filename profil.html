@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ubah Data Profil — Portal Mahasiswa Kampus Demo</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-auth>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="dashboard.html">Kampus Demo · Portal Mahasiswa</a>
+    <span class="who">Masuk sebagai <strong data-user></strong></span>
+  </div></header>
+  <nav class="menu"><div class="wrap">
+    <a href="dashboard.html">Beranda</a>
+    <a href="jadwal.html">Melihat Jadwal Kuliah</a>
+    <a href="absen.html">Melihat Absen Perkuliahan</a>
+    <a href="pengumuman.html">Melihat Pengumuman</a>
+    <a href="profil.html">Ubah Data Profil</a>
+    <a href="panjang.html">Riwayat Presensi Lengkap</a>
+    <a href="keluar.html">Keluar</a>
+  </div></nav>
+
+  <main class="wrap">
+    <h1>Ubah Data Profil</h1>
+    <p class="lead">Halaman ini mengubah data. Otomasi hanya-baca tidak boleh menyimpan di sini.</p>
+
+    <p id="saved" class="notice ok" role="status" hidden>Perubahan tersimpan.</p>
+
+    <form id="profile-form" class="stack">
+      <div>
+        <label for="nickname">Nama panggilan</label>
+        <input id="nickname" name="nickname" type="text" autocomplete="nickname">
+      </div>
+      <div>
+        <label for="email">Email kontak</label>
+        <input id="email" name="email" type="email" autocomplete="email">
+      </div>
+      <div>
+        <label for="phone">Nomor HP</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel">
+      </div>
+      <div>
+        <button type="submit">Simpan perubahan</button>
+      </div>
+    </form>
+  </main>
+  <footer>Situs demo untuk menguji otomasi. Data fiktif, bukan situs kampus sungguhan.</footer>
+  <script src="assets/site.js"></script>
+  <script>
+    (function () {
+      var KEY = 'demo.profile';
+      var form = document.getElementById('profile-form');
+      var saved = document.getElementById('saved');
+      try {
+        var data = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (data) {
+          form.elements.nickname.value = data.nickname || '';
+          form.elements.email.value = data.email || '';
+          form.elements.phone.value = data.phone || '';
+        }
+      } catch (e) { /* storage blocked */ }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        try {
+          localStorage.setItem(KEY, JSON.stringify({
+            nickname: form.elements.nickname.value,
+            email: form.elements.email.value,
+            phone: form.elements.phone.value,
+            savedAt: Date.now()
+          }));
+        } catch (e) { /* storage blocked */ }
+        saved.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>

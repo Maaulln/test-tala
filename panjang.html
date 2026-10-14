@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Riwayat Presensi Lengkap — Portal Mahasiswa Kampus Demo</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-auth>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="dashboard.html">Kampus Demo · Portal Mahasiswa</a>
+    <span class="who">Masuk sebagai <strong data-user></strong></span>
+  </div></header>
+  <nav class="menu"><div class="wrap">
+    <a href="dashboard.html">Beranda</a>
+    <a href="jadwal.html">Melihat Jadwal Kuliah</a>
+    <a href="absen.html">Melihat Absen Perkuliahan</a>
+    <a href="pengumuman.html">Melihat Pengumuman</a>
+    <a href="profil.html">Ubah Data Profil</a>
+    <a href="panjang.html">Riwayat Presensi Lengkap</a>
+    <a href="keluar.html">Keluar</a>
+  </div></nav>
+
+  <main class="wrap">
+    <h1>Riwayat Presensi Lengkap</h1>
+    <p class="lead">Halaman sangat panjang untuk menguji batas context model. Baris dibuat otomatis oleh skrip.</p>
+
+    <table>
+      <thead><tr><th>No</th><th>Tanggal</th><th>Mata kuliah</th><th>Status</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </main>
+  <footer>Situs demo untuk menguji otomasi. Data fiktif, bukan situs kampus sungguhan.</footer>
+  <script src="assets/site.js"></script>
+  <script>
+    (function () {
+      var courses = ['Algoritma dan Pemrograman', 'Matematika Diskrit', 'Basis Data',
+        'Jaringan Komputer', 'Bahasa Inggris Teknik', 'Pendidikan Pancasila'];
+      var statuses = ['Hadir', 'Hadir', 'Hadir', 'Izin', 'Hadir', 'Alpa', 'Hadir', 'Sakit'];
+      var tbody = document.getElementById('rows');
+      var html = '';
+      for (var i = 1; i <= 300; i++) {
+        var day = new Date(2026, 7, 3 + Math.floor(i / 2));
+        var label = day.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        html += '<tr><td>' + i + '</td><td>' + label + '</td><td>' + courses[i % courses.length] +
+          '</td><td>' + statuses[(i * 7) % statuses.length] + '</td></tr>';
+      }
+      tbody.innerHTML = html;
+    })();
+  </script>
+</body>
+</html>
